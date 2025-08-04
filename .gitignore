@@ -2,12 +2,16 @@
 
 # dependencies
 node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # Expo
 .expo/
 dist/
 web-build/
 expo-env.d.ts
+.expo-shared/
 
 # Native
 .kotlin/
@@ -32,6 +36,38 @@ yarn-error.*
 
 # local env files
 .env*.local
+.env
 
 # typescript
 *.tsbuildinfo
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+Thumbs.db
+
+# Logs
+logs
+*.log
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Bundle artifacts
+*.jsbundle
+
+# CocoaPods
+/ios/Pods/
+
+# Flipper
+ios/Pods/Flipper
+ios/Pods/Flipper-*
+ios/Pods/FMDB
+ios/Pods/FlipperKit
+android/app/src/debug/java/com/*/ReactNativeFlipper.java
+android/app/src/release/java/com/*/ReactNativeFlipper.java
