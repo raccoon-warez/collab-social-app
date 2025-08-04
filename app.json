@@ -30,7 +30,19 @@
       ]
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro",
+      "output": "single",
+      "name": "Collab - Social Meetup App",
+      "shortName": "Collab",
+      "lang": "en",
+      "scope": "/",
+      "themeColor": "#2563eb",
+      "description": "Connect with people around you for spontaneous meetups and collaborative projects",
+      "orientation": "portrait",
+      "display": "standalone",
+      "startUrl": "/",
+      "backgroundColor": "#ffffff"
     },
     "plugins": [
       [

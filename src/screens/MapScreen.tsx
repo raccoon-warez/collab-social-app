@@ -5,10 +5,23 @@ import {
   Alert,
   TouchableOpacity,
   Text,
+  Platform,
 } from 'react-native';
-import MapView, { Marker, Circle } from 'react-native-maps';
 import * as Location from 'expo-location';
 import { Ionicons } from '@expo/vector-icons';
+
+// Conditional imports for different platforms
+let MapView: any, Marker: any, Circle: any;
+let WebMapView: any;
+
+if (Platform.OS === 'web') {
+  WebMapView = require('../components/WebMapView').default;
+} else {
+  const Maps = require('react-native-maps');
+  MapView = Maps.default;
+  Marker = Maps.Marker;
+  Circle = Maps.Circle;
+}
 
 export default function MapScreen() {
   const [location, setLocation] = useState<Location.LocationObject | null>(null);
@@ -49,42 +62,53 @@ export default function MapScreen() {
     );
   }
 
+  const initialRegion = {
+    latitude: location.coords.latitude,
+    longitude: location.coords.longitude,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
+  };
+
   return (
     <View style={styles.container}>
-      <MapView
-        style={styles.map}
-        initialRegion={{
-          latitude: location.coords.latitude,
-          longitude: location.coords.longitude,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-        showsUserLocation={true}
-        showsMyLocationButton={true}
-      >
-        {isVisible && (
-          <>
-            <Marker
-              coordinate={{
-                latitude: location.coords.latitude,
-                longitude: location.coords.longitude,
-              }}
-              title="You"
-              description="Your current location"
-            />
-            <Circle
-              center={{
-                latitude: location.coords.latitude,
-                longitude: location.coords.longitude,
-              }}
-              radius={radius}
-              fillColor="rgba(37, 99, 235, 0.1)"
-              strokeColor="rgba(37, 99, 235, 0.5)"
-              strokeWidth={2}
-            />
-          </>
-        )}
-      </MapView>
+      {Platform.OS === 'web' ? (
+        <WebMapView
+          style={styles.map}
+          initialRegion={initialRegion}
+          showsUserLocation={true}
+          showsMyLocationButton={true}
+        />
+      ) : (
+        <MapView
+          style={styles.map}
+          initialRegion={initialRegion}
+          showsUserLocation={true}
+          showsMyLocationButton={true}
+        >
+          {isVisible && (
+            <>
+              <Marker
+                coordinate={{
+                  latitude: location.coords.latitude,
+                  longitude: location.coords.longitude,
+                }}
+                title="You"
+                description="Your current location"
+              />
+              <Circle
+                center={{
+                  latitude: location.coords.latitude,
+                  longitude: location.coords.longitude,
+                }}
+                radius={radius}
+                fillColor="rgba(37, 99, 235, 0.1)"
+                strokeColor="rgba(37, 99, 235, 0.5)"
+                strokeWidth={2}
+              />
+            </>
+          )}
+        </MapView>
+      )}
 
       <View style={styles.controls}>
         <TouchableOpacity

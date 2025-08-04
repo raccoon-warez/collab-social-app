@@ -142,6 +142,48 @@ src/
 - Navigation structure supports easy addition of new screens
 - Components follow React Native best practices
 
+## Deployment
+
+### Web Deployment (Vercel)
+
+The app includes a web landing page optimized for Vercel deployment:
+
+1. **Deploy to Vercel:**
+   ```bash
+   # Install Vercel CLI
+   npm i -g vercel
+   
+   # Deploy to Vercel
+   vercel --prod
+   ```
+
+2. **Or connect GitHub repository:**
+   - Go to [vercel.com](https://vercel.com)
+   - Import the GitHub repository
+   - Vercel will automatically deploy on every push
+
+3. **Custom Domain:**
+   - Add your custom domain in Vercel dashboard
+   - DNS will be automatically configured
+
+The web version shows a landing page with app information and download links, as the full React Native functionality requires mobile devices.
+
+### Mobile App Deployment
+
+For production mobile app deployment:
+
+1. **iOS App Store:**
+   ```bash
+   npm run build:ios
+   # Follow Expo/EAS Build documentation
+   ```
+
+2. **Google Play Store:**
+   ```bash
+   npm run build:android
+   # Follow Expo/EAS Build documentation
+   ```
+
 ## Contributing
 
 1. Create a feature branch
